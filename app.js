@@ -4,15 +4,18 @@ const textToSpeech = require('./utils/text-to-speech');
 const uploadImage = require("./utils/uploadImage");
 const app = express();
 
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/index", (req, res, next) => {
-  res.sendFile(path.join(__dirname) + "/views/index.html");
+  res.render("index");
   console.log(process.env.PORT);
 });
 
 app.get("/other-posts", (req, res, next) => {
-  res.sendFile(path.join(__dirname) + "/views/other-posts.html");
+  res.render("other-posts");
   console.log(process.env.PORT);
 });
 
