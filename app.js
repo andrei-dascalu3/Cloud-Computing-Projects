@@ -3,8 +3,15 @@ const path = require("path");
 
 const app = express();
 
-app.get("/", (req, res, next) => {
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get("/index", (req, res, next) => {
   res.sendFile(path.join(__dirname) + "/views/index.html");
+  console.log(process.env.PORT);
+});
+
+app.get("/other-posts", (req, res, next) => {
+  res.sendFile(path.join(__dirname) + "/views/other-posts.html");
   console.log(process.env.PORT);
 });
 
