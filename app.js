@@ -6,6 +6,7 @@ const path = require("path");
 const textToSpeech = require('./utils/text-to-speech');
 const uploadImage = require("./utils/uploadImage");
 const speechToText = require("./utils/speech-to-text");
+const translate = require("./utils/translation");
 
 //database:
 const gstore = new Gstore();
@@ -40,7 +41,10 @@ app.listen(PORT, (_) => {
 });
 
 
-speechToText.speechToText();
+// const text = 'Salut intunecime, prietenul meu vechi... Vino aici intunecime, intunecime.';
+// translate.translate(text);
+
+//speechToText.speechToText();
 
 // const text = "This function converts a text to an audioF file. Have fun!";
 // textToSpeech.textToSpeech(text);
