@@ -105,3 +105,4 @@ dist
 
 #others
 credentials
+test-datastore.js
