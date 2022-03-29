@@ -22,15 +22,21 @@ app.set('views', 'views');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get("/", (req, res, next) => {
+  res.redirect("/index");
+});
+
 app.get("/index", (req, res, next) => {
   res.render("index");
   console.log(process.env.PORT);
 });
 
-app.get("/other-posts", (req, res, next) => {
-  res.render("other-posts");
-  console.log(process.env.PORT);
-});
+app.get("/other-posts", postController.getPosts);
+
+// app.get("/other-posts", (req, res, next) => {
+//   res.render("other-posts", postController.getPosts(req, res));
+//   console.log(process.env.PORT);
+// });
 
 app.get("/posts", postController.getPosts);
 
@@ -40,7 +46,7 @@ app.listen(PORT, (_) => {
 });
 
 
-speechToText.speechToText();
+//speechToText.speechToText();
 
 // const text = "This function converts a text to an audioF file. Have fun!";
 // textToSpeech.textToSpeech(text);

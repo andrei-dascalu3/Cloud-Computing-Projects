@@ -77,28 +77,15 @@ textarea#post-area::-webkit-scrollbar-thumb {
 
 /* Posts display*/
 /* BEGIN */
-.regular-post {
-  height: 10em;
-  width: 100%;
-  margin-bottom: 2em;
+.post-text-container {
+    background-color: #fff;
+    border-radius: 1em;
 }
 
-.regular-post .post-button {
-    height: 20%;
-    margin-top: 0.1em;
-    margin-right: 1em;
+.post-text-content {
+    font-size: 2em;
 }
 
-.regular-post button {
-    height: 100%;
-}
-
-.post-content {
-    height: 80%;
-    width: 100%;
-    border: 3px black;
-    background-color: cyan;
-}
 /* END */
 
 body {
