@@ -20,10 +20,11 @@
 <body>
     <%- include('./includes/navigation.ejs') %>
     <div class="container py-5">
-        <%- include('./includes/post.ejs') %>
-        <%- include('./includes/post.ejs') %>
-        <%- include('./includes/post.ejs') %>
-        <%- include('./includes/post.ejs') %>
+        <% if (postsData.entities.length > 0) { %>
+            <% for (let entity of postsData.entities) { %> 
+                <%- include('./includes/post.ejs', {entity: entity}) %>
+            <% } %>
+        <% } %>
     </div>
 </body>
 
