@@ -18,22 +18,13 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-center align-items-start">
-        <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <span class="navbar-brand position-absolute mx-0">CC - HW3</span>
-        <div class="navbar-collapse collapse" id="navbar">
-            <ul class="navbar-nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="index">Post</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Other posts</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <%- include('./includes/navigation.ejs') %>
+    <div class="container py-5">
+        <%- include('./includes/post.ejs') %>
+        <%- include('./includes/post.ejs') %>
+        <%- include('./includes/post.ejs') %>
+        <%- include('./includes/post.ejs') %>
+    </div>
 </body>
 
 </html>

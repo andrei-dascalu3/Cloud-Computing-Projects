@@ -30,6 +30,11 @@ textarea#post-area::-webkit-scrollbar-thumb {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   background-color: #4285f4;
 }
+
+.post-buttons > button {
+  margin-top: 1em;
+  margin-right: 1em;
+}
 /* END */
 
 /* Image upload */
@@ -67,6 +72,32 @@ textarea#post-area::-webkit-scrollbar-thumb {
 .image-area img {
   z-index: 2;
   position: relative;
+}
+/* END */
+
+/* Posts display*/
+/* BEGIN */
+.regular-post {
+  height: 10em;
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.regular-post .post-button {
+    height: 20%;
+    margin-top: 0.1em;
+    margin-right: 1em;
+}
+
+.regular-post button {
+    height: 100%;
+}
+
+.post-content {
+    height: 80%;
+    width: 100%;
+    border: 3px black;
+    background-color: cyan;
 }
 /* END */
 
