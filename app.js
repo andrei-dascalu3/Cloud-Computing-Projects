@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
-const textToSpeech = require('./text-to-speech');
-const uploadImage = require("./uploadImage");
+const textToSpeech = require('./utils/text-to-speech');
+const uploadImage = require("./utils/uploadImage");
 const app = express();
 
 app.get("/", (req, res, next) => {
