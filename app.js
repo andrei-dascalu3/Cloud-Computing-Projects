@@ -33,6 +33,12 @@ app.get("/index", (req, res, next) => {
 
 app.get("/other-posts", postController.getPosts);
 
+app.get("/translated-text", (req, res) => {
+  const content = req.query.content;
+  console.log(content);
+  res.json("test");
+} );
+
 // app.get("/other-posts", (req, res, next) => {
 //   res.render("other-posts", postController.getPosts(req, res));
 //   console.log(process.env.PORT);
