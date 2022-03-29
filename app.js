@@ -36,16 +36,13 @@ app.get("/other-posts", postController.getPosts);
 
 app.get("/translated-text", (req, res) => {
   const content = req.query.content;
-  console.log(content);
-  res.json("test");
+  translate(content).then(translatedContent => res.json(translatedContent)).catch(err => res.status(400).json(err));
 } );
 
 // app.get("/other-posts", (req, res, next) => {
 //   res.render("other-posts", postController.getPosts(req, res));
 //   console.log(process.env.PORT);
 // });
-
-app.get("/posts", postController.getPosts);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, (_) => {

@@ -4,9 +4,7 @@ const translate = new Translate({keyFilename: './credentials/translation-API.jso
 
 const target = 'en';
 
-exports.translate = (text) =>{
-    translateText(text);
-}
+module.exports = translateText;
 
 async function translateText(text) {
   // Translates the text into the target language. "text" can be a string for
@@ -14,8 +12,9 @@ async function translateText(text) {
   // multiple texts.
   let [translations] = await translate.translate(text, target);
   translations = Array.isArray(translations) ? translations : [translations];
-  console.log('Translations:');
-  translations.forEach((translation, i) => {
-    console.log(`${text[i]} => (${target}) ${translation}`);
+  let resp = ""
+  translations.forEach((translation, _) => {
+    resp += translation;
   });
+  return new Promise((resolve, _) => resolve(resp));
 }

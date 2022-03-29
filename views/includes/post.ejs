@@ -16,13 +16,16 @@
             <button type="button" class="btn btn-primary btn-sm" type="button">LISTEN</button>
             <form action="/translated-text" method="GET">
                 <input type="hidden" value="<%= entity.content %>" name="postId">
-                <button type="button" class="btn btn-info btn-sm" onclick=" myFunction('<%= entity.content %>')">TRANSLATE</button>
+                <button type="button" class="btn btn-info btn-sm"
+                    onclick=" myFunction('<%= entity.content %>', '<%= entity.id %>')">TRANSLATE</button>
             </form>
             <script>
-               async function myFunction(content){
-                const translatedText = await fetch(`translated-text?content=${content}`);
-                console.log(translatedText);
-               }
+                async function myFunction(content, id) {
+                    const translatedText = await fetch(`translated-text?content=${content}`);
+                    translatedText.json().then(result => {
+                       document.getElementById(id).textContent =result;
+                    });
+                }
             </script>
         </div>
     </div>
