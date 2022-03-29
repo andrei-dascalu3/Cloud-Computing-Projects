@@ -22,8 +22,8 @@ app.listen(PORT, (_) => {
 });
 
 
-// const text = "This function converts a text to an audioF file. Have fun!";
-// textToSpeech.textToSpeech(text);
+const text = "This function converts a text to an audioF file. Have fun!";
+textToSpeech.textToSpeech(text);
 
 
 
