@@ -5,7 +5,7 @@ const { Schema } = gstore;
 
 const postSchema = new Schema({
     content: {type: String, optional: true },
-    image: {type: String, required: true}
+    image: {type: String, optional: true}
 });
 
 module.exports = gstore.model('Posts', postSchema);

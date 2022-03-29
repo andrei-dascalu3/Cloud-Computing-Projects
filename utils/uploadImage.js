@@ -1,13 +1,27 @@
-const {Storage} = require('@google-cloud/storage');
+const { Storage } = require("@google-cloud/storage");
 
-const storage = new Storage({keyFilename: './credentials/cloud-computing-hw-3-345510-adf1f581252b.json'});
+const storage = new Storage({
+  keyFilename: "./credentials/datastore-API.json",
+});
 
-async function uploadImage(bucketName, filePath, destFileName) {
-    await storage.bucket(bucketName).upload(filePath, {
-      destination: destFileName,
-    });
-
-    console.log(`${filePath} uploaded to ${bucketName}`);
+function uploadImage(bucketName, bufferStream) {
+  const bucket = storage.bucket(bucketName);
+  const file = bucket.file('image.png');
+  bufferStream.pipe(file.createWriteStream({
+    metadata: {
+      contentType: 'image/png',
+      metadata: {
+        custom: 'metadata',
+        cacheControl: 'no-cache'
+      },
+      public: true
+    }
+  }))
+  .on('error', function(err) {console.log(err);})
+  .on('finish', function() {
+    console.log('jmeker');
+    // The file upload is complete.
+  });
 }
 
 module.exports = uploadImage;

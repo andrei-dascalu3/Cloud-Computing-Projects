@@ -7,6 +7,20 @@ const getPosts = (_, res) => {
         }).catch(err => res.status(400).json(err));
 };
 
+const createPost = (req, res) => {
+    console.log(req.body);
+    const entityData = Post.sanitize(req.body);
+    const post = new Post(entityData);
+    post.save()
+    .then((entity) => {
+        res.json(entity.plain());
+    })
+    .catch((err) => {
+        res.status(400).json(err);
+    });
+};
+
 module.exports = {
-    getPosts
+    getPosts,
+    createPost
 };

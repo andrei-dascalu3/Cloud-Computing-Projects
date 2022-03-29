@@ -10,6 +10,7 @@ function readURL(input) {
             $('#imageResult')
                 .attr('src', e.target.result);
         };
+        console.log(input.files[0]);
         reader.readAsDataURL(input.files[0]);
     }
 }

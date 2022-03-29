@@ -48,16 +48,24 @@
                     <header class="text-white text-center">
                         <p class="lead mb-0">What's on your mind?</p>
                     </header>
-
                     <div class="input-group">
-                        <textarea name="post-area" id="post-area" placeholder="Write something..." cols="30"
-                            rows="1"></textarea>
+                        <textarea name="content" id="content" placeholder="Write something..." cols="30"
+                            rows="1" form="form"></textarea>
                     </div>
-
-                    <div class="post-buttons">
-                        <button type="button" class="btn btn-primary btn-lg" type="button">POST</button>
-                        <button type="button" class="btn btn-secondary btn-lg" type="button">SPEAK <i class="fa fa-microphone"></i></button>
-                    </div>
+                    <form action="/post" method="post" id="form">
+                        <input type="hidden" id="image" name="image">
+                        <div class="post-buttons">
+                            <button type="button" class="btn btn-primary btn-lg" onclick="createPost()">POST</button>
+                            <button type="button" class="btn btn-secondary btn-lg" type="button">SPEAK <i class="fa fa-microphone"></i></button>
+                        </div>
+                        <script>
+                            function createPost() {
+                                const imageUrl = document.getElementById('imageResult').getAttribute('src');
+                                document.getElementById('image').setAttribute('value', imageUrl);
+                                document.getElementById('form').submit();
+                            }
+                        </script>
+                    </form>
                 </div>
             </div>
         </div>
