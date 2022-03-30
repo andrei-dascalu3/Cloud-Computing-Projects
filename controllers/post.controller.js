@@ -8,16 +8,20 @@ const getPosts = (_, res) => {
 };
 
 const createPost = (req, res) => {
+    req.body.image = req.query.imageURL;
     console.log(req.body);
+    
     const entityData = Post.sanitize(req.body);
     const post = new Post(entityData);
     post.save()
     .then((entity) => {
-        res.json(entity.plain());
+        res.redirect('/other-posts');
+        //res.json(entity.plain());
     })
     .catch((err) => {
         res.status(400).json(err);
     });
+    
 };
 
 module.exports = {

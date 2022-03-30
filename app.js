@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const stream = require('stream');
 const fs = require('fs');
 const path = require("path");
+const { v4: uuidv4 } = require('uuid');
 
 const textToSpeech = require("./utils/text-to-speech");
 const uploadImage = require("./utils/uploadImage");
@@ -40,15 +41,18 @@ app.get("/index", (req, res, next) => {
 });
 
 app.post("/post", (req, res, next) => {
-  const imgData = req.body.image.replace(/^data:image\/png;base64,/, "");;
-  const bufferStream = new stream.PassThrough();
-  bufferStream.end(Buffer.from(imgData, 'base64'));
-  uploadImage('image-files-hw3', bufferStream);
-  res.end();
-  //res.redirect("/final-post");
+  const imgData = req.body.image.replace(/^data:image\/png;base64,/, "");
+  var data = Buffer.from(imgData, 'base64');
+  const uniqueId = uuidv4();
+  fs.writeFile(`./${uniqueId}.png`, data, function () {
+    const testImagePath = path.join(__dirname, `${uniqueId}.png`);
+    uploadImage('image-files-hw3', testImagePath).catch(console.error);
+    const imgURL = `https://storage.googleapis.com/image-files-hw3/${uniqueId}.png`;
+    res.redirect(307, `/final-post?imageURL=${imgURL}`);
+  });
 });
 
-//app.post("/final-post", postController.createPost);
+app.post("/final-post", postController.createPost);
 
 app.get("/other-posts", postController.getPosts);
 
