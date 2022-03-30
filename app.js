@@ -13,7 +13,7 @@ const translate = require("./utils/translation");
 //database:
 const gstore = new Gstore();
 const datastore = new Datastore({
-  keyFilename: "./credentials/translation-API.json",
+  keyFilename: "./credentials/datastore-API-v2.json",
 });
 gstore.connect(datastore);
 instances.set("unique-id", gstore);
