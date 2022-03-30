@@ -29,11 +29,11 @@ app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (_, res, _) => {
+app.get("/", (_, res) => {
   res.redirect("/index");
 });
 
-app.get("/index", (_, res, _) => {
+app.get("/index", (_, res) => {
   res.render("index");
 });
 
