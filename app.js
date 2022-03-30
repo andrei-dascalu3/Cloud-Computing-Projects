@@ -2,10 +2,10 @@ const express = require("express");
 const { Gstore, instances } = require("gstore-node");
 const { Datastore } = require("@google-cloud/datastore");
 const bodyParser = require("body-parser");
-const stream = require('stream');
-const fs = require('fs');
+const stream = require("stream");
+const fs = require("fs");
 const path = require("path");
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 
 const textToSpeech = require("./utils/text-to-speech");
 const uploadImage = require("./utils/uploadImage");
@@ -42,14 +42,25 @@ app.get("/index", (req, res, next) => {
 
 app.post("/post", (req, res, next) => {
   const imgData = req.body.image.replace(/^data:image\/png;base64,/, "");
-  var data = Buffer.from(imgData, 'base64');
+  var data = Buffer.from(imgData, "base64");
+  // res.writeHead(200, { 'Content-Type': 'image/jpg' });
+  // res.end(data, 'utf-8');
+
+  // const uniqueId = uuidv4();
+  // fs.writeFile(`./${uniqueId}.png`, data, function () {
+  //   const testImagePath = path.join(`./${uniqueId}.png`);
+  //   uploadImage('image-files-hw3', `./${uniqueId}.png`).catch(console.error);
+  //   const imgURL = `https://storage.googleapis.com/image-files-hw3/${uniqueId}.png`;
+  //   res.redirect(307, `/final-post?imageURL=${imgURL}`);
+  // });
+
   const uniqueId = uuidv4();
-  fs.writeFile(`./${uniqueId}.png`, data, function () {
-    const testImagePath = path.join(__dirname, `${uniqueId}.png`);
-    uploadImage('image-files-hw3', testImagePath).catch(console.error);
-    const imgURL = `https://storage.googleapis.com/image-files-hw3/${uniqueId}.png`;
-    res.redirect(307, `/final-post?imageURL=${imgURL}`);
-  });
+  uploadImage("image-files-hw3", data, uniqueId)
+    .then((_) => {
+      const imgURL = `https://storage.googleapis.com/image-files-hw3/${uniqueId}.png`;
+      res.redirect(307, `/final-post?imageURL=${imgURL}`);
+    })
+    .catch(console.error);
 });
 
 app.post("/final-post", postController.createPost);
