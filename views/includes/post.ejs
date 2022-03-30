@@ -1,32 +1,61 @@
 <div class="row gx-5">
-    <div class="col-md-6 mb-4">
-        <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
-            <img src="<%= entity.image %>" class="img-fluid" />
-            <a href="#!">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-            </a>
-        </div>
+  <div class="col-md-6 mb-4">
+    <div
+      class="bg-image hover-overlay ripple shadow-2-strong rounded-5"
+      data-mdb-ripple-color="light"
+    >
+      <img src="<%= entity.image %>" class="img-fluid" />
+      <a href="#!">
+        <div
+          class="mask"
+          style="background-color: rgba(251, 251, 251, 0.15)"
+        ></div>
+      </a>
     </div>
+  </div>
 
-    <div class="col-md-6 mb-4 post-text-container">
-        <p class="text-info post-text-content" id="<%= entity.id %>">
-            <%= entity.content %>
-        </p>
-        <div class="post-buttons">
-            <button type="button" class="btn btn-primary btn-sm" type="button">LISTEN</button>
-            <form action="/translated-text" method="GET">
-                <input type="hidden" value="<%= entity.content %>" name="postId">
-                <button type="button" class="btn btn-info btn-sm"
-                    onclick=" myFunction('<%= entity.content %>', '<%= entity.id %>')">TRANSLATE</button>
-            </form>
-            <script>
-                async function myFunction(content, id) {
-                    const translatedText = await fetch(`translated-text?content=${content}`);
-                    translatedText.json().then(result => {
-                       document.getElementById(id).textContent =result;
-                    });
-                }
-            </script>
-        </div>
+  <div class="col-md-6 mb-4 post-text-container">
+    <p class="text-info post-text-content" id="<%= entity.id %>">
+      <%= entity.content %>
+    </p>
+    <div class="post-buttons">
+      <button
+        type="button"
+        class="btn btn-primary btn-sm"
+        type="button"
+        onclick="playAudio('<%= entity.id%>')"
+      >
+        LISTEN
+      </button>
+      <form action="/translated-text" method="GET">
+        <input type="hidden" value="<%= entity.content %>" name="postId" />
+        <button
+          type="button"
+          class="btn btn-info btn-sm"
+          onclick=" myFunction('<%= entity.content %>', '<%= entity.id %>')"
+        >
+          TRANSLATE
+        </button>
+      </form>
+      <script>
+        async function myFunction(content, id) {
+          const translatedText = await fetch(
+            `translated-text?content=${content}`
+          );
+          translatedText.json().then((result) => {
+            document.getElementById(id).textContent = result;
+          });
+        }
+
+        async function playAudio(id) {
+          const content = document.getElementById(id).textContent;
+          const audioEncoded = await fetch(`audio-text?content=${content}`);
+          audioEncoded.json().then((audio) => {
+            const snd = new Audio("data:audio/wav;base64," + audio);
+            snd.play();
+          });
+        }
+      </script>
     </div>
+  </div>
 </div>

@@ -2,9 +2,7 @@ const textToSpeech = require("@google-cloud/text-to-speech");
 const fs = require("fs");
 const util = require("util");
 
-exports.textToSpeech = (text) => {
-  quickStart(text)
-};
+module.exports = quickStart;
 
 async function quickStart(text) {
   const client = new textToSpeech.TextToSpeechClient({keyFilename: './credentials/text-to-speech-API.json'});
@@ -17,7 +15,8 @@ async function quickStart(text) {
   // Performs the text-to-speech request
   const [response] = await client.synthesizeSpeech(request);
   // Write the binary audio content to a local file
-  const writeFile = util.promisify(fs.writeFile);
-  await writeFile('output.mp3', response.audioContent, 'binary');
-  console.log('Audio content written to file: output.mp3');
+  return response.audioContent;
+  // const writeFile = util.promisify(fs.writeFile);
+  // await writeFile('output.mp3', response.audioContent, 'binary');
+  
 }

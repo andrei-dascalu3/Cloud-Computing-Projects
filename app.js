@@ -67,6 +67,20 @@ app.post("/final-post", postController.createPost);
 
 app.get("/other-posts", postController.getPosts);
 
+app.get("/audio-text", async (req, res) => {
+  const content = req.query.content;
+  // const audioContent = await textToSpeech(content);
+  // var data = Buffer.from(audioContent, "binary");
+  // console.log(data);
+  // res.setHeader("Content-Type", "audio/mpeg").send(audioContent);
+  textToSpeech(content)
+    .then((audioContent) => {
+      var data = audioContent.toString('base64');
+      res.json(data);
+    })
+    .catch((err) => res.status(400).json(err));
+});
+
 app.get("/translated-text", (req, res) => {
   const content = req.query.content;
   translate(content)
