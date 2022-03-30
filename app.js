@@ -29,15 +29,15 @@ app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res, next) => {
+app.get("/", (_, res, _) => {
   res.redirect("/index");
 });
 
-app.get("/index", (req, res, next) => {
+app.get("/index", (_, res, _) => {
   res.render("index");
 });
 
-app.post("/post", (req, res, next) => {
+app.post("/post", (req, res, _) => {
   const imgData = req.body.image.replace(/^data:image\/png;base64,/, "");
   var data = Buffer.from(imgData, "base64");
 

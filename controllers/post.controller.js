@@ -16,7 +16,7 @@ const createPost = (req, res) => {
   const post = new Post(entityData);
   post
     .save()
-    .then((entity) => {
+    .then( _ => {
       res.redirect("/other-posts");
     })
     .catch((err) => {
