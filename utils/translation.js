@@ -1,8 +1,10 @@
-const {Translate} = require('@google-cloud/translate').v2;
+const { Translate } = require("@google-cloud/translate").v2;
 
-const translate = new Translate({keyFilename: './credentials/translation-API.json'});
+const translate = new Translate({
+  keyFilename: "./credentials/translation-API.json",
+});
 
-const target = 'en';
+const target = "en";
 
 module.exports = translateText;
 
@@ -12,7 +14,7 @@ async function translateText(text) {
   // multiple texts.
   let [translations] = await translate.translate(text, target);
   translations = Array.isArray(translations) ? translations : [translations];
-  let resp = ""
+  let resp = "";
   translations.forEach((translation, _) => {
     resp += translation;
   });

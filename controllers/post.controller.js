@@ -1,30 +1,30 @@
-const Post = require('../models/post.model');
+const Post = require("../models/post.model");
 
 const getPosts = (_, res) => {
-    Post.list()
-        .then(entities => {
-            res.render("other-posts", {postsData: entities});
-        }).catch(err => res.status(400).json(err));
+  Post.list()
+    .then((entities) => {
+      res.render("other-posts", { postsData: entities });
+    })
+    .catch((err) => res.status(400).json(err));
 };
 
 const createPost = (req, res) => {
-    req.body.image = req.query.imageURL;
-    console.log(req.body);
-    
-    const entityData = Post.sanitize(req.body);
-    const post = new Post(entityData);
-    post.save()
+  req.body.image = req.query.imageURL;
+  console.log(req.body);
+
+  const entityData = Post.sanitize(req.body);
+  const post = new Post(entityData);
+  post
+    .save()
     .then((entity) => {
-        res.redirect('/other-posts');
-        //res.json(entity.plain());
+      res.redirect("/other-posts");
     })
     .catch((err) => {
-        res.status(400).json(err);
+      res.status(400).json(err);
     });
-    
 };
 
 module.exports = {
-    getPosts,
-    createPost
+  getPosts,
+  createPost,
 };

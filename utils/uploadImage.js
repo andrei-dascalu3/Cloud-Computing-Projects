@@ -14,7 +14,7 @@ async function uploadImage(bucketName, filePath, destFileName) {
 
 async function uploadBuffer(bucketName, buffer, uuid) {
   const fileHandle = storage.bucket(bucketName).file(`${uuid}.png`);
-  const [ fileExists ] = await fileHandle.exists();
+  const [fileExists] = await fileHandle.exists();
   return fileHandle.save(buffer);
 }
 
