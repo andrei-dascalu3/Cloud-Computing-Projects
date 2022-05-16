@@ -1,3 +1,6 @@
 [submodule "final-project-ui"]
 	path = final-project-ui
 	url = https://github.com/RaduTheMan/final-project-ui
+[submodule "final-project-api"]
+	path = final-project-api
+	url = https://github.com/RaduTheMan/final-project-api.git
